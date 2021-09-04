@@ -1,16 +1,18 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const Router = express.Router();
 const connection = require('../connection')
 const cors = require('cors');
 express().use(cors());
 
-router.post('/book', (req, res) => {
-	sql = "INSERT INTO" + req.body.username + "(name, age, dob, contact, email, flightno, source, destination, date, flightcompany) VALUES('"+ req.body.name + "', '" + req.body.age + "', '" + req.body.dob + "', '" + req.body.contact + "', '" + req.body.email + "', '" + req.body.flightno + "', '" + req.body.source + "', '" + req.body.destination + "', '" + req.body.date + "', '" + req.body.flightcompany + "');"
+Router.post('/book', (req, res) => {
+	sql = "INSERT INTO " + req.body.body.username + " (name, age, dob, contact, email, flightno, source, destination, date, flightcompany) VALUES('"+ req.body.body.name + "', '" + req.body.body.age + "', '" + req.body.body.dob + "', '" + req.body.body.contact + "', '" + req.body.body.email + "', '" + req.body.body.flightno + "', '" + req.body.body.source + "', '" + req.body.body.destination + "', '" + req.body.body.date + "', '" + req.body.body.flightcompany + "');"
 	connection.query(sql)
 })
 
-router.get('/gethistory', (req, res) => {
-	sql = "SELECT * FROM" + req.query.username + ";"
+Router.get('/gethistory', (req, res) => {
+	console.log(req.query)
+	sql = "SELECT * FROM " + req.query.username + ";"
+	console.log(sql)
 	connection.query(sql, (err, rows, fields) => {
 			if(!err)
 			{
@@ -23,4 +25,4 @@ router.get('/gethistory', (req, res) => {
 		})
 })
 
-module.exports=router;
+module.exports=Router;

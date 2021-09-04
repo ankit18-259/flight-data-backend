@@ -5,7 +5,9 @@ const cors = require('cors');
 express().use(cors());
 
 router.post('/signup', function(req, res, next) {
-  sql = "INSERT INTO userData (username, email, password) VALUES('" + req.body.username + "', '" + req.body.email + "', '" + req.body.password + "');"
+  console.log(req.body)
+  sql = "INSERT INTO userData (username, email, password) VALUES('" + req.body.body.username + "', '" + req.body.body.email + "', '" + req.body.body.password + "');"
+  console.log(sql)
   connection.query(sql, (err, rows, fields) => {
       if(!err)
       {
@@ -16,7 +18,8 @@ router.post('/signup', function(req, res, next) {
         console.log(err)
       }
   });
-  sql2 = "CREATE TABLE "+req.body.username+" (name VARCHAR(255), age VARCHAR(255), dob VARCHAR(255), contact VARCHAR(255), email VARCHAR(255), flightno VARCHAR(255), source VARCHAR(255), destination VARCHAR(255), flightcompany VARCHAR(255);"
+  sql2 = "CREATE TABLE "+req.body.body.username+" (name VARCHAR(255), age VARCHAR(255), dob VARCHAR(255), contact VARCHAR(255), email VARCHAR(255), flightno VARCHAR(255), source VARCHAR(255), destination VARCHAR(255), date VARCHAR(255), flightcompany VARCHAR(255));"
+  console.log(sql2)
   connection.query(sql2)
 })
 
